@@ -1,0 +1,50 @@
+.reserve-home {
+  display: flex;
+  gap: 50px;
+  width: 50%;
+  margin: auto;
+}
+.reserve-img {
+}
+.reserve-sel {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.res-details-modal {
+  height: 70%;
+  width: 50%;
+  border: 2px solid black;
+  margin: auto;
+  background-color: aliceblue;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.res-details-final {
+  display: flex;
+  gap: 20px;
+}
+.res-details-final-container {
+  height: 70%;
+  width: 50%;
+  border: 2px solid black;
+  margin: auto;
+  background-color: aliceblue;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-direction: column;
+}
+.res-details-card {
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
