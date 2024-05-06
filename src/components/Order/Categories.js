@@ -5,7 +5,6 @@ const buttonCatStyle = {
   width: "100%",
 };
 export default function Categories({
-  setCategory,
   alphabetSel,
   setAlphabetSel,
   filterDataFun,
@@ -42,7 +41,6 @@ export default function Categories({
             break;
         }
         filterDataFun(categorySel);
-        // setCategory(categorySel);
       }}
     >
       <Grid item sx={{ display: "flex", alignItems: "center" }} sm={4} xs={6}>

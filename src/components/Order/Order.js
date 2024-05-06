@@ -20,8 +20,8 @@ export default function Order() {
   const [searchAndFilteredData, setSearchAndFilteredData] = useState([]);
   async function fetchMenu(url) {
     const res = await axios.get(url);
-    setFilteredData(res.data.meals);
-    setSearchAndFilteredData(res.data.meals);
+    // console.log("bro");
+
     return res.data.meals;
   }
   const {
@@ -70,8 +70,18 @@ export default function Order() {
   //   isLoadingMeals,
   //   " bro"
   // );
+  useEffect(() => {
+    if (mealsData) {
+      setFilteredData(mealsData);
+      setSearchAndFilteredData(mealsData);
+    }
+    if (searchVal && mealsData) {
+      console.log("hello");
+      searchDish(searchVal, mealsData);
+    }
+  }, [mealsData]);
   function searchDish(searchDishVal, filterData) {
-    // console.log(searchDishVal, filterData);
+    console.log(searchDishVal, filterData);
     const newFilteredData = filterData.filter((item) => {
       // console.log(
       //   item["strMeal"],
@@ -109,8 +119,26 @@ export default function Order() {
     }
     setFilteredData(newFilteredData);
   }
-  if (isLoadingMeals || !searchAndFilteredData) return <div>Loading....</div>;
-  if (mealError) return <div>Error....</div>;
+  function getMealsData() {
+    console.log(filteredData, searchAndFilteredData, "search");
+    if (isLoadingMeals || !searchAndFilteredData) return <div>Loading....</div>;
+    if (mealError) return <div>Error....</div>;
+    return (
+      <>
+        <Categories
+          setAlphabetSel={setAlphabetSel}
+          alphabetSel={alphabetSel}
+          filterDataFun={filterDataFun}
+        />
+        <Grid container spacing={5}>
+          {searchAndFilteredData.map((item) => {
+            return <Meal key={item.idMeal} {...item} />;
+          })}
+        </Grid>
+      </>
+    );
+  }
+
   return (
     <Container>
       <Typography variant="h4" sx={{ textAlign: "center" }}>
@@ -138,16 +166,7 @@ export default function Order() {
           ),
         }}
       />
-      <Categories
-        setAlphabetSel={setAlphabetSel}
-        alphabetSel={alphabetSel}
-        filterDataFun={filterDataFun}
-      />
-      <Grid container spacing={5}>
-        {searchAndFilteredData.map((item) => {
-          return <Meal key={item.idMeal} {...item} />;
-        })}
-      </Grid>
+      {getMealsData()}
     </Container>
   );
 }
