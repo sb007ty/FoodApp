@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { LinkOffOutlined, ShoppingCart } from "@mui/icons-material";
 import "../styles/header.css";
+import { useSelector } from "react-redux";
 export default function Header() {
   const linkStyle = ({ isActive, isPending, isTransitioning }) => {
     return {
@@ -14,10 +15,17 @@ export default function Header() {
       marginRight: "50px",
     };
   };
+  const totalMealsInCart = useSelector((state) => {
+    let total = 0;
+    state.meals.cart.forEach((item) => {
+      total += item.count;
+    });
+    return total;
+  });
   return (
     <AppBar
       position="sticky"
-      sx={{ marginBottom: "50px", backgroundColor: "whitesmoke" }}
+      sx={{ paddingBottom: "20px", backgroundColor: "whitesmoke" }}
     >
       <Toolbar sx={{ gap: "10px" }}>
         <IconButton
@@ -64,8 +72,11 @@ export default function Header() {
           Order
         </NavLink>
 
-        <NavLink style={linkStyle} to={"reserve"} className={"cart-link"}>
-          <ShoppingCart />
+        <NavLink style={linkStyle} to={"cart"} className={"cart-link"}>
+          <IconButton variant="outlined">
+            <ShoppingCart />
+            {totalMealsInCart}
+          </IconButton>
         </NavLink>
 
         <Button sx={{ color: "black" }}>Login</Button>

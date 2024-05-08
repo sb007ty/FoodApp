@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 import Meal from "./Meal";
 import {
+  Box,
   Container,
   Grid,
   InputAdornment,
@@ -71,10 +72,8 @@ export default function Order() {
   //   " bro"
   // );
   useEffect(() => {
-    if (mealsData) {
-      setFilteredData(mealsData);
-      setSearchAndFilteredData(mealsData);
-    }
+    setFilteredData(mealsData);
+    setSearchAndFilteredData(mealsData);
     if (searchVal && mealsData) {
       console.log("hello");
       searchDish(searchVal, mealsData);
@@ -121,7 +120,20 @@ export default function Order() {
   }
   function getMealsData() {
     console.log(filteredData, searchAndFilteredData, "search");
-    if (isLoadingMeals || !searchAndFilteredData) return <div>Loading....</div>;
+    if (!searchAndFilteredData && !isLoadingMeals)
+      return (
+        <div>
+          <p>No meals found</p>
+
+          <Categories
+            setAlphabetSel={setAlphabetSel}
+            alphabetSel={alphabetSel}
+            filterDataFun={filterDataFun}
+          />
+        </div>
+      );
+    if (isLoadingMeals || (!searchAndFilteredData && isLoadingMeals))
+      return <div>Loading....</div>;
     if (mealError) return <div>Error....</div>;
     return (
       <>
@@ -140,33 +152,35 @@ export default function Order() {
   }
 
   return (
-    <Container>
-      <Typography variant="h4" sx={{ textAlign: "center" }}>
-        Our Popular Dishes starting with - {alphabetSel}
-      </Typography>
-      <TextField
-        id="outlined-basic"
-        label="Search Dishes"
-        variant="outlined"
-        fullWidth
-        sx={{ marginTop: "20px" }}
-        onChange={(e) => {
-          setSearchVal(e.target.value);
-          searchDish(e.target.value, filteredData);
-        }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Search
-                onClick={() => {
-                  searchDish(searchVal, filteredData);
-                }}
-              />
-            </InputAdornment>
-          ),
-        }}
-      />
-      {getMealsData()}
-    </Container>
+    <Box className="order-page">
+      <Container>
+        <Typography variant="h4" sx={{ textAlign: "center" }}>
+          Our Popular Dishes starting with - {alphabetSel}
+        </Typography>
+        <TextField
+          id="outlined-basic"
+          label="Search Dishes"
+          variant="outlined"
+          fullWidth
+          sx={{ marginTop: "20px" }}
+          onChange={(e) => {
+            setSearchVal(e.target.value);
+            searchDish(e.target.value, filteredData);
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Search
+                  onClick={() => {
+                    searchDish(searchVal, filteredData);
+                  }}
+                />
+              </InputAdornment>
+            ),
+          }}
+        />
+        {getMealsData()}
+      </Container>
+    </Box>
   );
 }

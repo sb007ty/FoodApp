@@ -48,6 +48,7 @@ export default function ReservationModify({ setResModify, setModifyingRes }) {
             Modify
           </Button>
           <Button
+            sx={{ backgroundColor: "orange", height: "50px" }}
             onClick={(e) => {
               setResModify(false);
             }}
