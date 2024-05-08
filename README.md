@@ -1,6 +1,5 @@
 # Things I learned
 
-how font style is applied
 
 # Getting Started with Create React App
 
