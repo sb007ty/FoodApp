@@ -10,6 +10,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { ThemeProvider } from "@mui/material";
+import mainTheme from "./custom-mui/mainTheme";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Auth0Provider
@@ -21,9 +23,11 @@ root.render(
   >
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Provider store={store}>
-        <RouterProvider router={router}>
-          <App />
-        </RouterProvider>
+        <ThemeProvider theme={mainTheme}>
+          <RouterProvider router={router}>
+            <App />
+          </RouterProvider>
+        </ThemeProvider>
       </Provider>
     </LocalizationProvider>
   </Auth0Provider>
