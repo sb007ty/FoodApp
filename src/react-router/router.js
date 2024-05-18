@@ -4,6 +4,8 @@ import Reservation from "../components/reservation/Reservation";
 import Order from "../components/Order/Order";
 import Home from "../components/Home";
 import Cart from "../components/Cart/Cart";
+import Login from "../components/login/Login";
+import Logout from "../components/login/Logout";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "logout",
+        element: <Logout />,
       },
     ],
   },

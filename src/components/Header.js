@@ -5,7 +5,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { LinkOffOutlined, ShoppingCart } from "@mui/icons-material";
 import "../styles/header.css";
 import { useSelector } from "react-redux";
+import Login from "./login/Login";
+import Logout from "./login/Logout";
+import { useAuth0 } from "@auth0/auth0-react";
 export default function Header() {
+  const { user, isAuthenticated } = useAuth0();
+  console.log(user, isAuthenticated, " auth-status");
   const linkStyle = ({ isActive, isPending, isTransitioning }) => {
     return {
       fontWeight: isActive ? "bold" : "",
@@ -78,8 +83,17 @@ export default function Header() {
             {totalMealsInCart}
           </IconButton>
         </NavLink>
+        {!isAuthenticated && (
+          <NavLink to={"login"}>
+            <Button sx={{ color: "black" }}>Login</Button>
+          </NavLink>
+        )}
 
-        <Button sx={{ color: "black" }}>Login</Button>
+        {isAuthenticated && (
+          <NavLink to={"logout"}>
+            <Button sx={{ color: "black" }}>Logout</Button>
+          </NavLink>
+        )}
       </Toolbar>
     </AppBar>
   );

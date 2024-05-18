@@ -1,11 +1,8 @@
-import { Button, Container, div, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import restaurant from "../../images/restaurant-reserve.jpg";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { useDispatch } from "react-redux";
-import dayjs from "dayjs";
-import { addOrUpdateReservationDetails } from "../../redux/features/reservationSlice";
-import { nanoid } from "nanoid";
 import ReservationModify from "./ReservationModify";
 import ReservationDetails from "./ReservationDetails";
 import "../../styles/reserve.css";
@@ -17,7 +14,6 @@ export default function Reservation() {
   const [resModify, setResModify] = useState(false);
 
   const [modifyingRes, setModifyingRes] = useState(false);
-  const dispatch = useDispatch();
   return (
     <div className="reserve-home">
       <div className="reserve-img">
