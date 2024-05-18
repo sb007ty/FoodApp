@@ -13,14 +13,35 @@ export default function Home() {
         container
         spacing={5}
         sx={{
-          //   flexFlow: "column",
           justifyContent: "center",
           alignItems: "center",
-          minHeight: "100vh",
+          minHeight: "80vh",
+          padding: "50px",
         }}
       >
-        <Grid item>
-          <Typography variant="h2">Best Restaurant in Town</Typography>
+        <Grid item xs={12} lg={6}>
+          <Box>
+            <img
+              className="home-img"
+              src={food1}
+              width={"500px"}
+              height={"500px"}
+              // style={{ borderRadius: "50%" }}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <Typography
+            variant="h2"
+            className="home-heading-1"
+            sx={{
+              "@media (max-width: 600px)": {
+                fontSize: "2.75rem",
+              },
+            }}
+          >
+            Best Restaurant in Town
+          </Typography>
           <Typography variant="h6" sx={{ marginBottom: "40px" }}>
             We provide the best food in town, best delivery and dine in service
           </Typography>
@@ -30,16 +51,6 @@ export default function Home() {
           <Button variant="outlined">
             <Link to={"/reserve"}>Reservation</Link>
           </Button>
-        </Grid>
-        <Grid item>
-          <Box>
-            <img
-              src={food1}
-              width={"500px"}
-              height={"500px"}
-              style={{ borderRadius: "50%" }}
-            />
-          </Box>
         </Grid>
       </Grid>
       <br />
@@ -52,19 +63,21 @@ export default function Home() {
           alignItems: "center",
           marginBottom: "150px",
           minHeight: "80vh",
+          padding: "50px",
         }}
       >
-        <Grid item>
-          <Box>
+        <Grid item xs={12} lg={6}>
+          <Box className="home-img">
             <img
+              className="home-img"
               src={food2}
               width={"500px"}
               height={"500px"}
-              style={{ borderRadius: "50%" }}
+              // style={{ borderRadius: "50%" }}
             />
           </Box>
         </Grid>
-        <Grid item width={"40%"}>
+        <Grid item xs={12} lg={6}>
           <Typography variant="h2">Our most popular Dish</Typography>
           <Typography variant="h6" sx={{ marginBottom: "40px" }}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
@@ -77,7 +90,6 @@ export default function Home() {
           </Button>
         </Grid>
       </Grid>
-      <Order />
     </Box>
   );
 }
