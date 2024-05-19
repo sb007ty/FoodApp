@@ -1,5 +1,6 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 const initialState = {
+  editReservation: false,
   resDetails: [],
   updateResId: {
     id: "",
@@ -17,7 +18,7 @@ const reservationSlice = createSlice({
   name: "reservation",
   initialState,
   reducers: {
-    addOrUpdateReservationDetails(state, action) {
+    addOrUpdateReservation(state, action) {
       const { id } = action.payload;
       let fl = 0;
       state.resDetails.forEach((item, index) => {
@@ -38,9 +39,9 @@ const reservationSlice = createSlice({
     },
     deleteReservation(state, action) {
       const { id } = action.payload;
-      console.log(current(state.resDetails));
+      // console.log(current(state.resDetails));
       const newResDetails = state.resDetails.filter((item) => item["id"] != id);
-      console.log(newResDetails, id, " new");
+      // console.log(newResDetails, id, " new");
       return { resDetails: newResDetails, updateResId: state.updateResId };
     },
     modifyRes(state) {
@@ -50,18 +51,34 @@ const reservationSlice = createSlice({
       state.updateResId.id = action.payload;
     },
     finishUpdateRes(state) {
-      console.log(current(state));
+      // console.log(current(state));
       state.updateResId.id = "";
       state.updateResId.update = false;
+      state.editReservation = false;
+    },
+    editReservation(state, action) {
+      state.updateResId.update = true;
+      state.updateResId.id = action.payload;
+      state.editReservation = true;
     },
   },
 });
+export const resDetailsSelector = (state, resId) => {
+  for (let obj of state.reservation.resDetails) {
+    if (obj["id"] == resId) {
+      // console.log("bro", obj);
+      return obj;
+    }
+  }
+};
 export const {
-  addOrUpdateReservationDetails,
+  addOrUpdateReservation,
   updateReservationDetails,
   deleteReservation,
   modifyRes,
   addResId,
   finishUpdateRes,
+  editReservation,
 } = reservationSlice.actions;
+
 export default reservationSlice.reducer;

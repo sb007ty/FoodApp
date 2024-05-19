@@ -7,8 +7,10 @@ import {
   modifyRes,
 } from "../../redux/features/reservationSlice";
 import ReservationDetailsCard from "./ReservationDetailsCard";
+import { useNavigate } from "react-router-dom";
 
-export default function ReservationModify({ setResModify, setModifyingRes }) {
+export default function ReservationModify({ setResModify }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const resId = useSelector((state) => {
     console.log(state);
@@ -22,20 +24,19 @@ export default function ReservationModify({ setResModify, setModifyingRes }) {
       }}
     >
       <div className="res-details-final-container">
+        <ReservationDetailsCard resId={resId} />
+
         <div
           className="res-details-final"
           style={{ width: "25%", height: "25%" }}
         >
           <Button
             sx={{ backgroundColor: "orange", height: "50px" }}
-            variant="contained"
             onClick={(e) => {
-              setResModify(false);
-              dispatch(deleteReservation({ id: resId }));
-              dispatch(finishUpdateRes());
+              navigate("/bookings");
             }}
           >
-            Cancel
+            Confirm Res
           </Button>
           <Button
             sx={{ backgroundColor: "orange", height: "50px" }}
@@ -45,20 +46,20 @@ export default function ReservationModify({ setResModify, setModifyingRes }) {
               dispatch(modifyRes());
             }}
           >
-            Modify
+            Modify Res
           </Button>
+
           <Button
             sx={{ backgroundColor: "orange", height: "50px" }}
+            variant="contained"
             onClick={(e) => {
               setResModify(false);
+              dispatch(deleteReservation({ id: resId }));
+              dispatch(finishUpdateRes());
             }}
           >
-            Confirm
+            Cancel Res
           </Button>
-        </div>
-        <div>
-          {" "}
-          <ReservationDetailsCard />
         </div>
       </div>
     </Modal>

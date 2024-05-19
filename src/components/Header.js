@@ -115,6 +115,11 @@ export default function Header() {
             Order
           </NavLink>
         </Grid>
+        <Grid item>
+          <NavLink style={linkStyle} to={"bookings"}>
+            Bookings
+          </NavLink>
+        </Grid>
 
         <Grid
           item

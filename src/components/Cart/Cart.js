@@ -19,7 +19,7 @@ export default function Cart() {
           }}
         >
           <Button variant="outlined">
-            <Link to={"/order"}>Its never to Late to order</Link>
+            <Link to={"/order"}>Its never too late to order</Link>
           </Button>
         </Box>
       );

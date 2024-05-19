@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateReservationDetails,
-  addOrUpdateReservationDetails,
+  addOrUpdateReservation,
   addResId,
 } from "../../redux/features/reservationSlice";
 import ReservationDetailsCard from "./ReservationDetailsCard";
@@ -33,7 +33,7 @@ export default function ReservationDetails({
       <div className="res-details-modal">
         <TextField
           id="outlined-basic"
-          label="Name"
+          label="Enter Name"
           variant="outlined"
           onChange={(e) => {
             console.log(e.target.value);
@@ -52,7 +52,7 @@ export default function ReservationDetails({
               dispatch(addResId(newId));
             }
             dispatch(
-              addOrUpdateReservationDetails({
+              addOrUpdateReservation({
                 id: newId,
                 date: dateVal.$d.toDateString(),
                 time: timeVal.$d.toTimeString(),
@@ -64,7 +64,7 @@ export default function ReservationDetails({
             setResModify(true);
           }}
         >
-          Confirm Reservation
+          Submit
         </Button>
       </div>
     </Modal>

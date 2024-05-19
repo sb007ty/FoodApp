@@ -3,9 +3,23 @@
   gap: 50px;
   width: 50%;
   margin: auto;
+  margin-top: 50px;
+}
+@media (max-width: 1500px) {
+  .reserve-home {
+    flex-direction: column;
+  }
 }
 .reserve-img {
+  border-radius: 50%;
 }
+@media (max-width: 500px) {
+  .reserve-img {
+    width: 100%;
+    height: auto;
+  }
+}
+
 .reserve-sel {
   display: flex;
   flex-direction: column;
@@ -41,10 +55,4 @@
   justify-content: center;
   gap: 20px;
   flex-direction: column;
-}
-.res-details-card {
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
 }

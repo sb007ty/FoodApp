@@ -6,6 +6,8 @@ import Home from "../components/Home";
 import Cart from "../components/Cart/Cart";
 import Login from "../components/login/Login";
 import Logout from "../components/login/Logout";
+import Booking from "../components/bookings/Booking";
+import BookingDetails from "../components/bookings/BookingDetails";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "logout",
         element: <Logout />,
+      },
+      {
+        path: "bookings",
+        element: <BookingDetails />,
       },
     ],
   },

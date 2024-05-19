@@ -1,33 +1,51 @@
+import { Button, Paper } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  addResId,
+  editReservation,
+  modifyRes,
+  resDetailsSelector,
+} from "../../redux/features/reservationSlice";
 
-export default function ReservationDetailsCard() {
-  const resId = useSelector((state) => {
-    console.log(state);
-    return state.reservation.updateResId.id;
-  });
-  const resDetails = useSelector((state) => {
-    for (let obj of state.reservation.resDetails) {
-      if (obj["id"] == resId) {
-        console.log("bro", obj);
-        return obj;
-        // const newObj = { ...obj };
-        // let { time } = newObj;
-        // if (time >= 0 && time <= 12) {
-        //   time += "AM";
-        // } else {
-        //   time += "PM";
-        // }
-      }
-    }
-  });
-  console.log(resDetails, " resDe");
+export default function ReservationDetailsCard({ resId, page }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const resDetails = useSelector((state) => resDetailsSelector(state, resId));
+  // console.log(resDetails, " resDe");
   return (
-    <div className="res-details-card">
-      <h2>Res details-</h2>
+    <Paper
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+        justifyContent: "center",
+        alignItems: "center",
+        border: "2px solid black",
+        borderRadius: "25px",
+        padding: "25px",
+        width: "50%",
+        // "@media (min-width: 2000px)": {
+        //   width: "25%",
+        // },
+      }}
+    >
+      {/* <h2>Res details-</h2> */}
+      <p>Name: {resDetails.userName}</p>
       <p> Date- {resDetails.date}</p>
       <p> Time- {resDetails.time}</p>
       <p> PartySize- {resDetails.partySize}</p>
-    </div>
+      {page === "booking" && (
+        <Button
+          onClick={() => {
+            dispatch(editReservation(resId));
+            navigate("/reserve");
+          }}
+        >
+          Edit Booking
+        </Button>
+      )}
+    </Paper>
   );
 }

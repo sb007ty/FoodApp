@@ -1,27 +1,54 @@
 import { Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import restaurant from "../../images/restaurant-reserve.jpg";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReservationModify from "./ReservationModify";
 import ReservationDetails from "./ReservationDetails";
 import "../../styles/reserve.css";
+import {
+  finishUpdateRes,
+  resDetailsSelector,
+} from "../../redux/features/reservationSlice";
 export default function Reservation() {
-  const [dateVal, setDateVal] = useState(null);
-  const [timeVal, setTimeVal] = useState(null);
-  const [partySize, setPartySize] = useState("");
+  const editReservation = useSelector(
+    (state) => state.reservation.editReservation
+  );
+  const editResId = useSelector((state) => state.reservation.updateResId.id);
+  const editResDetails = useSelector((state) =>
+    resDetailsSelector(state, editResId)
+  );
+  console.log(editResDetails, "broo");
+  const [dateVal, setDateVal] = useState(
+    editResDetails === true ? resDetails.date : null
+  );
+  const [timeVal, setTimeVal] = useState(
+    editResDetails === true ? resDetails.time : null
+  );
+  const [partySize, setPartySize] = useState(
+    editResDetails === true ? resDetails.partySize : ""
+  );
   const [resDetails, setResDetails] = useState(false);
-  const [resModify, setResModify] = useState(false);
+  const [resModify, setResModify] = useState(editResDetails);
+  const dispatch = useDispatch();
 
-  const [modifyingRes, setModifyingRes] = useState(false);
+  const modifyRes = useSelector(
+    (state) => state.reservation.updateResId.update
+  );
+  useEffect(() => {
+    return () => {
+      dispatch(finishUpdateRes());
+    };
+  }, []);
   return (
     <div className="reserve-home">
-      <div className="reserve-img">
+      <div>
         <img
+          className="reserve-img"
           src={restaurant}
           alt="restaurant-img"
-          width={"500px"}
-          height={"500px"}
+          width={"300px"}
+          height={"300px"}
         />{" "}
       </div>
       <div className="reserve-sel">
@@ -55,7 +82,7 @@ export default function Reservation() {
             setResDetails(true);
           }}
         >
-          Book Now
+          {modifyRes === true ? "Update Reservation" : "Book Now"}
         </Button>
       </div>
 
@@ -68,12 +95,7 @@ export default function Reservation() {
           partySize={partySize}
         />
       )}
-      {resModify && (
-        <ReservationModify
-          setResModify={setResModify}
-          setModifyingRes={setModifyingRes}
-        />
-      )}
+      {resModify && <ReservationModify setResModify={setResModify} />}
     </div>
   );
 }
