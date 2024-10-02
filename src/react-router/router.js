@@ -8,6 +8,7 @@ import Login from "../components/login/Login";
 import Logout from "../components/login/Logout";
 import Booking from "../components/bookings/Booking";
 import BookingDetails from "../components/bookings/BookingDetails";
+import Favorites from "../components/favorites/Favorites";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
         element: <Order />,
       },
       {
-        path: "home",
+        path: "",
         element: <Home />,
       },
       {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "bookings",
         element: <BookingDetails />,
+      },
+      {
+        path: "favorites",
+        element: <Favorites />,
       },
     ],
   },

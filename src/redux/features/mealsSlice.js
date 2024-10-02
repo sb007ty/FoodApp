@@ -3,6 +3,7 @@ import { createSlice, current } from "@reduxjs/toolkit";
 const initialState = {
   meals: [],
   cart: [],
+  fav: [],
 };
 const mealsSlice = createSlice({
   name: "meals",
@@ -36,7 +37,11 @@ const mealsSlice = createSlice({
     addMeals(state, action) {
       state.cart.push(action.paylaod);
     },
+    addFavMeals(state, action) {
+      state.fav.push(action.payload);
+    },
   },
 });
-export const { addMealToCart, removeMealFromCart } = mealsSlice.actions;
+export const { addMealToCart, removeMealFromCart, addFavMeals } =
+  mealsSlice.actions;
 export default mealsSlice.reducer;

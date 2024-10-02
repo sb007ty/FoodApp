@@ -98,7 +98,7 @@ export default function Header() {
           <NavLink
             style={linkStyle}
             className={"home-link header-link"}
-            to={"home"}
+            to={""}
           >
             Home
           </NavLink>
@@ -120,6 +120,11 @@ export default function Header() {
             Bookings
           </NavLink>
         </Grid>
+        {/* <Grid item>
+          <NavLink style={linkStyle} to={"favorites"}>
+            Favorites
+          </NavLink>
+        </Grid> */}
 
         <Grid
           item

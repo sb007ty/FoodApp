@@ -3,7 +3,9 @@ import React from "react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useDispatch, useSelector } from "react-redux";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
+  addFavMeals,
   addMealToCart,
   addToCart,
   removeMealFromCart,
@@ -30,6 +32,16 @@ export default function Meal({ strMealThumb, strMeal, idMeal }) {
         idMeal: idMeal,
         strMealThumb,
         count: 1,
+      })
+    );
+  }
+  function addMealFav() {
+    dispatch(
+      addFavMeals({
+        strMeal: strMeal,
+        price: idMeal[0] + idMeal[2],
+        idMeal: idMeal,
+        strMealThumb,
       })
     );
   }
@@ -94,6 +106,9 @@ export default function Meal({ strMealThumb, strMeal, idMeal }) {
           </Typography>
           <Typography variant="span">
             <AddIcon sx={{ cursor: "pointer" }} onClick={addMeal} />
+          </Typography>
+          <Typography variant="span">
+            <FavoriteIcon sx={{ cursor: "pointer" }} onClick={addMealFav} />
           </Typography>
         </Box>
       </Paper>
