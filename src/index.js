@@ -18,7 +18,7 @@ root.render(
     domain="dev-z8jqlszzmh4dtru0.us.auth0.com"
     clientId="lwt1pC3FhrVvga7c7hmTGVzihR3665Kv"
     authorizationParams={{
-      redirect_uri: window.location.origin + "/home",
+      redirect_uri: window.location.origin,
     }}
   >
     <LocalizationProvider dateAdapter={AdapterDayjs}>
